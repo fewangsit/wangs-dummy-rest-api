@@ -6,14 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
-  app.enableCors({
-    origin: ['http://localhost:9090', 'http://localhost:8090'],
-    methods: 'GET',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    credentials: false,
-    allowedHeaders: 'Content-Type, Accept, Authorization',
-  });
+  app.enableCors();
 
   await app.listen(3000);
 }
