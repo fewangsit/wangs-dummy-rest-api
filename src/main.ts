@@ -7,7 +7,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   app.enableCors({
-    origin: '*',
+    origin: ['http://localhost:9090', 'http://localhost:8090'],
     methods: 'GET',
     preflightContinue: false,
     optionsSuccessStatus: 204,
