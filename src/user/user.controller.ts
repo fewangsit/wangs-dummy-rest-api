@@ -7,6 +7,7 @@ import {
 } from './dto/get-users.dto'; // Kita akan membuat DTO ini selanjutnya
 import { User } from './user.interface';
 import userDummy from './user.dummy';
+import { getNestedProperyValue } from 'src/utils';
 
 @Controller('user')
 export class UserController {
@@ -54,8 +55,14 @@ export class UserController {
 
     if (sortBy) {
       filteredUsers.sort((a, b) => {
-        const comparison = a[sortBy].localeCompare(b[sortBy]);
+        const comparison = String(
+          getNestedProperyValue(a, sortBy),
+        ).localeCompare(b[sortBy]);
         return sortOrder == 1 ? comparison : -comparison;
+      });
+    } else {
+      filteredUsers.sort((a, b) => {
+        return a.name.localeCompare(b.name);
       });
     }
 
