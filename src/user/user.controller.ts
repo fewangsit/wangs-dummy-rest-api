@@ -7,7 +7,7 @@ import {
 } from './dto/get-users.dto'; // Kita akan membuat DTO ini selanjutnya
 import { User } from './user.interface';
 import userDummy from './user.dummy';
-import { getNestedProperyValue } from 'src/utils';
+import { getNestedProperyValue } from '../utils';
 
 @Controller('user')
 export class UserController {
