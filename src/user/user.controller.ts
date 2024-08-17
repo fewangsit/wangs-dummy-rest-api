@@ -32,8 +32,8 @@ export class UserController {
     }
 
     if (country) {
-      filteredUsers = filteredUsers.filter(
-        (user) => user.address.country.toLowerCase() === country.toLowerCase(),
+      filteredUsers = filteredUsers.filter((user) =>
+        JSON.parse(country).some((c: string) => c == user.address.country),
       );
     }
 
@@ -71,7 +71,6 @@ export class UserController {
 
   @Get('options')
   getCountryOptions(@Query(GetOptionPipeTransfrom) query: GetOptionsDto) {
-    console.log('🚀 ~ UserController ~ getCountryOptions ~ query:', query);
     const { country } = query;
     const countries = new Set(
       this.dummyUsers.map((user) => user.address.country),
@@ -86,7 +85,7 @@ export class UserController {
 
     return {
       data: {
-        countryOptions,
+        country: countryOptions,
       },
     };
   }
