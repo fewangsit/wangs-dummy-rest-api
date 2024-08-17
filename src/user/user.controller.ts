@@ -15,16 +15,8 @@ export class UserController {
 
   @Get()
   getUsers(@Query(GetUsersPipeTransfrom) query: GetUsersDto) {
-    const {
-      page = 1,
-      limit = 10,
-      search,
-      country,
-      minAge,
-      maxAge,
-      sortBy,
-      sortOrder,
-    } = query;
+    const { page, limit, search, country, minAge, maxAge, sortBy, sortOrder } =
+      query;
 
     let filteredUsers = this.dummyUsers;
 
@@ -66,8 +58,8 @@ export class UserController {
       });
     }
 
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
+    const startIndex = limit && page ? (page - 1) * limit : 0;
+    const endIndex = limit && page ? startIndex + limit : undefined;
 
     const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
 
